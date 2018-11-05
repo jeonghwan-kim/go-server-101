@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSum(t *testing.T) {
@@ -17,12 +19,6 @@ func TestSum(t *testing.T) {
 
 	for _, test := range tests {
 		actual := Sum(test.x, test.y)
-		if actual != test.z {
-			t.Error(
-				"expected", test.z,
-				"actual", actual,
-			)
-		}
+		assert.Equal(t, actual, test.z, "they should be equal")
 	}
-
 }
