@@ -10,6 +10,16 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// 오직 테스트 목적을 위한 함수
+func Sum(a ...int) int {
+	sum := 0
+	for _, i := range a {
+		sum += i
+	}
+
+	return sum
+}
+
 func bucketHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method, r.URL)
 	w.WriteHeader(http.StatusOK)
