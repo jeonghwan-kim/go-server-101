@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// 오직 테스트 목적을 위한 함수
+// Sum : 오직 테스트 목적을 위한 함수
 func Sum(a ...int) int {
 	sum := 0
 	for _, i := range a {
@@ -20,13 +20,14 @@ func Sum(a ...int) int {
 	return sum
 }
 
-func bucketHandler(w http.ResponseWriter, r *http.Request) {
+func BucketHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method, r.URL)
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	io.WriteString(w, `{"id": 1, "name": "my bucket 1"}`)
 }
 
+// Bucket ...
 type Bucket struct {
 	Name string `json:"name"`
 }
@@ -50,7 +51,7 @@ func createBucketHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/buckets/{id}", bucketHandler)
+	router.HandleFunc("/api/buckets/{id}", BucketHandler)
 	router.HandleFunc("/api/buckets", createBucketHandler).Methods("POST")
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static")))
 
